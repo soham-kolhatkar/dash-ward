@@ -4,7 +4,8 @@ const KEY = 'dw-intro-seen'
 
 function shouldPlay() {
   if (typeof window === 'undefined') return false
-  if (window.location.pathname !== '/') return false
+  const home = import.meta.env.BASE_URL.replace(/\/$/, '') || '/'
+  if (window.location.pathname.replace(/\/$/, '') !== home.replace(/\/$/, '')) return false
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false
   try {
     return sessionStorage.getItem(KEY) !== '1'
